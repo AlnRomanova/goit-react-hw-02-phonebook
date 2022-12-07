@@ -1,12 +1,14 @@
+import css from './ContactList.module.css';
+
 const ContactList = ({contacts, onDeleteContact}) => {
 
   return (
-    <ul>
+    <ul className={css.contacts}>
     {contacts.map(({id, name, number}) => (
-     <li key={id} >
-       <p>{name}</p>
-       <p>{number}</p>
-       <button type="button" onClick={()=> onDeleteContact(id)}>Delete</button>
+     <li className={css.contactsItem} key={id} >
+       <p className={css.contactsValue}>{name}:</p>
+       <p className={css.contactsValue}>{number}</p>
+       <button className={css.contactsBtn} type="button" onClick={()=> onDeleteContact(id)}>Delete</button>
      </li>
    ))}
     </ul>
@@ -14,3 +16,4 @@ const ContactList = ({contacts, onDeleteContact}) => {
 }
 
 export default ContactList;
+

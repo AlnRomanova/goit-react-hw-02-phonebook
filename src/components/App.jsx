@@ -23,7 +23,7 @@ export class App extends Component {
     };
 
     if (this.state.contacts.some(e => e.name === data.name)) {
-      alert(`${data.name} is already in contact`);
+      alert(`${data.name} is already in contacts`);
     } else {
       return this.setState(({ contacts }) => ({
         contacts: [newContact, ...contacts],
@@ -52,7 +52,7 @@ export class App extends Component {
     const { filter } = this.state;
     const filteredContact = this.filterContact();
     return (
-      <div>
+      <div className="container">
         <h1>Phonebook</h1>
         <ContactForm
           handleNameChange={this.handleNameChange}
@@ -65,6 +65,7 @@ export class App extends Component {
           onDeleteContact={this.deleteContact}
         />
       </div>
+
     );
   }
 }

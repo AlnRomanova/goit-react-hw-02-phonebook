@@ -1,8 +1,10 @@
+import css from './Filter.module.css';
+
 const Filter = ({value, onChange}) => {
   return (
-    <label>
+    <label className={css.filterLabel}>
       Find contacts by name
-      <input type="text" value={value} onChange={onChange}/>
+      <input className={css.filterInput} type="text" value={value} onChange={onChange}/>
     </label>
 
   )
