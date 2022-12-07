@@ -1,5 +1,3 @@
-
-
 const ContactList = ({contacts, onDeleteContact}) => {
 
   return (
@@ -12,10 +10,6 @@ const ContactList = ({contacts, onDeleteContact}) => {
      </li>
    ))}
     </ul>
-
-
-
-
   )
 }
 
