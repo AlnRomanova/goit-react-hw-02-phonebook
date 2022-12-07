@@ -7,7 +7,7 @@ import Filter from './Filter';
 
 export class App extends Component {
 
-    state = {
+ state = {
       contacts: [
         {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
         {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
@@ -19,19 +19,19 @@ export class App extends Component {
 
 
   addContact = data => {
-    console.log(data)
 
     const newContact = {
       name: data.name,
       number: data.number,
       id: nanoid(),
   }
- if( data.name !== this.prevState.data.name ) {
-   return this.setState(({contacts}) => ({
-    contacts: [newContact,...contacts]}))
-} else {
-  alert(`${data.name} is already in contact`)
 
+
+ if (this.state.contacts.some(e=> e.name === data.name)) {
+   alert(`${data.name} is already in contact`)
+} else {
+    return this.setState(({contacts}) => ({
+    contacts: [newContact,...contacts]}))
 }
   }
 
@@ -40,9 +40,10 @@ export class App extends Component {
 
   };
 
-  findContact = () => {
+  filterContact = () => {
   const normalizedFilter = this.state.filter.toLowerCase();
-  return this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter),);
+  console.log(normalizedFilter)
+  return this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
 };
 
  deleteContact = (contactId) => {
@@ -51,16 +52,18 @@ export class App extends Component {
   }));
 };
 
-  render() {
-   const {contacts, filter} = this.state;
 
+
+  render() {
+   const {filter} = this.state;
+   const filteredContact = this.filterContact()
     return (
       <div>
         <h1>Phonebook</h1>
       <ContactForm  handleNameChange = {this.handleNameChange} addContact={this.addContact}/>
         <h2>Contacts</h2>
       <Filter value={filter} onChange={this.changeFilter} />
-      <ContactList contacts={contacts} onDeleteContact={this.deleteContact} onFindContact={this.findContact}/>
+      <ContactList contacts={filteredContact} onDeleteContact={this.deleteContact} />
     </div>
   );
   }
